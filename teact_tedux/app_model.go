@@ -42,7 +42,7 @@ func (model TeactTedux[T]) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		}
 		model.state = model.reducer(model.state, msg)
 	case tea.WindowSizeMsg:
-		model.parentComponent = model.parentComponent.Resize(msg.Width, msg.Height)
+		model.parentComponent.Resize(msg.Width, msg.Height)
 	}
 
 	return model, nil

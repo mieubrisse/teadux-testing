@@ -1,6 +1,7 @@
 package scrollable_list
 
 import (
+	"github.com/mieubrisse/teadux/helpers"
 	"github.com/mieubrisse/teadux/model"
 	"strings"
 )
@@ -19,7 +20,8 @@ func (list ScrollableList) View(state model.ListState) string {
 			prefix = "x "
 		}
 		lineRunes := []rune(prefix + itemString)
-		lineStr := string(lineRunes[:list.width])
+		lastRuneIdxExclusive := helpers.GetMinInt(list.width, len(lineRunes))
+		lineStr := string(lineRunes[:lastRuneIdxExclusive])
 		allLineStrs = append(allLineStrs, lineStr)
 
 		if idx >= list.height {
@@ -29,9 +31,7 @@ func (list ScrollableList) View(state model.ListState) string {
 	return strings.Join(allLineStrs, "\n")
 }
 
-func (list ScrollableList) Resize(width int, height int) ScrollableList {
+func (list *ScrollableList) Resize(width int, height int) {
 	list.width = width
 	list.height = height
-
-	return list
 }
