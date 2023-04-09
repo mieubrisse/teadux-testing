@@ -1,4 +1,4 @@
-package app_component
+package app
 
 import (
 	"github.com/mieubrisse/teadux/model"
