@@ -1,4 +1,4 @@
-module github.com/mieubrisse/teadux
+module github.com/mieubrisse/teadux-testing
 
 go 1.19
 
