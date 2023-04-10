@@ -2,7 +2,7 @@ package app
 
 import (
 	"github.com/mieubrisse/teadux/model"
-	"github.com/mieubrisse/teadux/view/displayable_array"
+	"github.com/mieubrisse/teadux/view/flexbox"
 )
 
 type AppComponent struct {
@@ -11,11 +11,11 @@ type AppComponent struct {
 	// width  int
 	// height int
 
-	TextArray displayable_array.DisplayableArray[model.AppState]
+	Flexbox flexbox.Flexbox[model.AppState]
 }
 
-func (a AppComponent) GetRunes(width int, height int, state model.AppState) [][]rune {
-	return a.TextArray.GetRunes(width, height, state)
+func (a AppComponent) View(width int, height int, state model.AppState) string {
+	return a.Flexbox.View(width, height, state)
 }
 
 /*

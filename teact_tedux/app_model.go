@@ -2,8 +2,8 @@ package teact_tedux
 
 import (
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/charmbracelet/lipgloss"
 	"github.com/mieubrisse/teadux/view/displayable"
-	"strings"
 )
 
 type Reducer[T any] func(currentState T, msg tea.KeyMsg) T
@@ -54,13 +54,13 @@ func (model TeactTedux[T]) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 func (model TeactTedux[T]) View() string {
-	runeBlock := model.parentComponent.GetRunes(model.width, model.height, model.state)
+	view := model.parentComponent.View(model.width, model.height, model.state)
 
-	resultLines := make([]string, len(runeBlock))
-	for idx, runeLine := range runeBlock {
-		resultLines[idx] = string(runeLine)
-	}
-	return strings.Join(resultLines, "\n")
+	// Set the view
+	return lipgloss.NewStyle().
+		MaxWidth(model.width).
+		MaxHeight(model.height).
+		Render(view)
 }
 
 /*

@@ -8,7 +8,8 @@ import (
 	"github.com/mieubrisse/teadux/teact_tedux"
 	"github.com/mieubrisse/teadux/view/app"
 	"github.com/mieubrisse/teadux/view/displayable"
-	"github.com/mieubrisse/teadux/view/displayable_array"
+	"github.com/mieubrisse/teadux/view/div"
+	"github.com/mieubrisse/teadux/view/flexbox"
 	"github.com/mieubrisse/teadux/view/text"
 	"os"
 )
@@ -33,15 +34,57 @@ func main() {
 
 	*/
 
-	var topLevelComponent displayable.Displayable[model.AppState] = app.AppComponent{
-		TextArray: displayable_array.DisplayableArray[model.AppState]{
-			LayoutDirection: displayable_array.Vertical,
-			Displayables: []displayable.Displayable[model.AppState]{
-				text.TextComponent[model.AppState]{Text: []rune("Hello world")},
-				text.TextComponent[model.AppState]{Text: []rune("I'm going")},
-				text.TextComponent[model.AppState]{Text: []rune("to dinner soon")},
+	/*
+		var topLevelComponent displayable.Displayable[model.AppState] = app.AppComponent{
+			Flexbox: flexbox.Flexbox[model.AppState]{
+				LayoutDirection: flexbox.Vertical,
+				Displayables: []displayable.Displayable[model.AppState]{
+					text.TextComponent[model.AppState]{Text: []rune("Hello world")},
+					text.TextComponent[model.AppState]{Text: []rune("I'm going")},
+					text.TextComponent[model.AppState]{Text: []rune("to dinner soon")},
+				},
 			},
+		}
+
+	*/
+
+	/*
+		innerFlexbox := flexbox.Flexbox[model.AppState]{
+			LayoutDirection: flexbox.Horizontal,
+			Items: []displayable.Displayable[model.AppState]{
+				text.TextComponent[model.AppState]{Text: "Yes, this is cool!"},
+				text.TextComponent[model.AppState]{Text: "This is also cool!"},
+			},
+		}
+	*/
+
+	topLevelFlexbox := flexbox.Flexbox[model.AppState]{
+		LayoutDirection: flexbox.Vertical,
+		Items: []displayable.Displayable[model.AppState]{
+			div.Div[model.AppState]{
+				Alignment: div.Left,
+				Items: []displayable.Displayable[model.AppState]{
+					text.TextComponent[model.AppState]{Text: "Hello"},
+					text.TextComponent[model.AppState]{Text: "      Cool"},
+					text.TextComponent[model.AppState]{Text: "        World"},
+					text.TextComponent[model.AppState]{Text: "         World"},
+					text.TextComponent[model.AppState]{Text: "          World"},
+					text.TextComponent[model.AppState]{Text: "           World"},
+					text.TextComponent[model.AppState]{Text: "           World"},
+				},
+				ExtrinsicWidth:  9,
+				ExtrinsicHeight: 5,
+			},
+			/*
+				text.TextComponent[model.AppState]{Text: "Hello world"},
+				text.TextComponent[model.AppState]{Text: "I'm going"},
+				text.TextComponent[model.AppState]{Text: "to dinner soon"},
+			*/
 		},
+	}
+
+	var topLevelComponent displayable.Displayable[model.AppState] = app.AppComponent{
+		Flexbox: topLevelFlexbox,
 	}
 
 	topLevelModel := teact_tedux.New(state, controller.Reduce, topLevelComponent)

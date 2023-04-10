@@ -7,5 +7,5 @@ type Displayable[T any] interface {
 	//   width & height; it is provided only so the displayable can
 	//   nicely format its own text
 	// It is expected that the parent will truncate to the desired length
-	GetRunes(width int, height int, state T) [][]rune
+	View(width int, height int, state T) string
 }

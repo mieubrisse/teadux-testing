@@ -1,16 +1,11 @@
 package text
 
-import "github.com/mieubrisse/teadux/helpers"
-
 type TextComponent[T any] struct {
-	Text []rune
+	Text string
 
 	// TODO wrap function???
 }
 
-func (t TextComponent[T]) GetRunes(width int, height int, _ T) [][]rune {
-	runeBlock := [][]rune{
-		t.Text,
-	}
-	return helpers.Blockify(runeBlock, width, height)
+func (t TextComponent[T]) View(width int, height int, _ T) string {
+	return t.Text
 }
