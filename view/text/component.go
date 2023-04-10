@@ -1,18 +1,16 @@
 package text
 
-type TextComponent struct {
-	text []rune
+import "github.com/mieubrisse/teadux/helpers"
+
+type TextComponent[T any] struct {
+	Text []rune
 
 	// TODO wrap function???
 }
 
-// TODO maybe take in a string and split it based on newlines??
-func New(text []rune) TextComponent {
-	return TextComponent{text: text}
-}
-
-func (t TextComponent) GetRunes(width int, height int, _ interface{}) [][]rune {
-	return [][]rune{
-		t.text,
+func (t TextComponent[T]) GetRunes(width int, height int, _ T) [][]rune {
+	runeBlock := [][]rune{
+		t.Text,
 	}
+	return helpers.Blockify(runeBlock, width, height)
 }

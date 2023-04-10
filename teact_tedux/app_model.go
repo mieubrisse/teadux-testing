@@ -2,7 +2,8 @@ package teact_tedux
 
 import (
 	tea "github.com/charmbracelet/bubbletea"
-	"github.com/mieubrisse/teadux/view"
+	"github.com/mieubrisse/teadux/view/displayable"
+	"strings"
 )
 
 type Reducer[T any] func(currentState T, msg tea.KeyMsg) T
@@ -13,13 +14,16 @@ type TeactTedux[T any] struct {
 
 	reducer Reducer[T]
 
-	parentComponent view.Component[T]
+	parentComponent displayable.Displayable[T]
+
+	width  int
+	height int
 }
 
 func New[T any](
 	initialState T,
 	reducer Reducer[T],
-	parentComponent view.Component[T],
+	parentComponent displayable.Displayable[T],
 ) TeactTedux[T] {
 	return TeactTedux[T]{
 		state:           initialState,
@@ -42,14 +46,21 @@ func (model TeactTedux[T]) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		}
 		model.state = model.reducer(model.state, msg)
 	case tea.WindowSizeMsg:
-		model.parentComponent.Resize(msg.Width, msg.Height)
+		model.width = msg.Width
+		model.height = msg.Height
 	}
 
 	return model, nil
 }
 
 func (model TeactTedux[T]) View() string {
-	return model.parentComponent.View(model.state)
+	runeBlock := model.parentComponent.GetRunes(model.width, model.height, model.state)
+
+	resultLines := make([]string, len(runeBlock))
+	for idx, runeLine := range runeBlock {
+		resultLines[idx] = string(runeLine)
+	}
+	return strings.Join(resultLines, "\n")
 }
 
 /*

@@ -18,16 +18,16 @@ const (
 //
 //	display cells available)
 type DisplayableArray[T any] struct {
-	layoutDirection LayoutDirection
+	LayoutDirection LayoutDirection
 
-	displayables []displayable.Displayable[T]
+	Displayables []displayable.Displayable[T]
 
 	// TODO margin, padding
 	// TODO different types of layouts that aren't just "even"
 }
 
 func (d DisplayableArray[T]) GetRunes(width int, height int, state T) [][]rune {
-	numDisplayables := len(d.displayables)
+	numDisplayables := len(d.Displayables)
 
 	// TODO smarter algorithm
 	heightPerElem := int(math.Round(float64(height) / float64(numDisplayables)))
@@ -36,13 +36,13 @@ func (d DisplayableArray[T]) GetRunes(width int, height int, state T) [][]rune {
 	}
 
 	displayableBlocks := make([][][]rune, numDisplayables)
-	for idx, toDisplay := range d.displayables {
+	for idx, toDisplay := range d.Displayables {
 		blockRunes := toDisplay.GetRunes(width, heightPerElem, state)
 		// TODO optimization to skip getting runes for blocks that aren't displayed
-		displayableBlocks[idx] = helpers.TruncateBlock(blockRunes, width, heightPerElem)
+		displayableBlocks[idx] = helpers.Blockify(blockRunes, width, heightPerElem)
 	}
 
 	untruncatedResultBlock := helpers.JoinBlocksVertically(displayableBlocks...)
-	result := helpers.TruncateBlock(untruncatedResultBlock, width, height)
+	result := helpers.Blockify(untruncatedResultBlock, width, height)
 	return result
 }
