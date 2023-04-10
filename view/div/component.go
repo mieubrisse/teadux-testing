@@ -42,23 +42,11 @@ func (d Div[T]) View(width int, height int, state T) string {
 	// Necessary to truncate + do the math because lipgloss applies border *before* truncating
 	truncatingStyle := lipgloss.NewStyle()
 	if d.ExtrinsicWidth > 0 {
-		contentWidth := d.ExtrinsicWidth
-		if d.Border.Left != "" || d.Border.TopLeft != "" || d.Border.BottomLeft != "" {
-			contentWidth -= 1
-		}
-		if d.Border.Right != "" || d.Border.TopRight != "" || d.Border.BottomRight != "" {
-			contentWidth -= 1
-		}
+		contentWidth := d.ExtrinsicWidth - d.Border.GetLeftSize() - d.Border.GetRightSize()
 		truncatingStyle = truncatingStyle.MaxWidth(contentWidth)
 	}
 	if d.ExtrinsicHeight > 0 {
-		contentHeight := d.ExtrinsicHeight
-		if d.Border.Top != "" || d.Border.TopLeft != "" || d.Border.TopRight != "" {
-			contentHeight -= 1
-		}
-		if d.Border.Bottom != "" || d.Border.BottomLeft != "" || d.Border.BottomRight != "" {
-			contentHeight -= 1
-		}
+		contentHeight := d.ExtrinsicHeight - d.Border.GetTopSize() - d.Border.GetBottomSize()
 		truncatingStyle = truncatingStyle.MaxHeight(contentHeight)
 	}
 	truncated := truncatingStyle.Render(verticallyJoined)

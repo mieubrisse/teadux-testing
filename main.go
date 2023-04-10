@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/charmbracelet/lipgloss"
 	"github.com/mieubrisse/teadux/controller"
 	"github.com/mieubrisse/teadux/model"
 	"github.com/mieubrisse/teadux/teact_tedux"
@@ -61,19 +62,27 @@ func main() {
 	topLevelFlexbox := flexbox.Flexbox[model.AppState]{
 		LayoutDirection: flexbox.Vertical,
 		Items: []displayable.Displayable[model.AppState]{
-			div.Div[model.AppState]{
-				Alignment: div.Left,
+			flexbox.Flexbox[model.AppState]{
 				Items: []displayable.Displayable[model.AppState]{
-					text.TextComponent[model.AppState]{Text: "Hello"},
-					text.TextComponent[model.AppState]{Text: "      Cool"},
-					text.TextComponent[model.AppState]{Text: "        World"},
-					text.TextComponent[model.AppState]{Text: "         World"},
-					text.TextComponent[model.AppState]{Text: "          World"},
-					text.TextComponent[model.AppState]{Text: "           World"},
-					text.TextComponent[model.AppState]{Text: "           World"},
+					div.Div[model.AppState]{
+						Items: []displayable.Displayable[model.AppState]{
+							text.TextComponent[model.AppState]{Text: "Hello"},
+						},
+						Border: lipgloss.NormalBorder(),
+					},
+					div.Div[model.AppState]{
+						Items: []displayable.Displayable[model.AppState]{
+							text.TextComponent[model.AppState]{Text: "       Cool"},
+						},
+						Border: lipgloss.NormalBorder(),
+					},
+					div.Div[model.AppState]{
+						Items: []displayable.Displayable[model.AppState]{
+							text.TextComponent[model.AppState]{Text: "            World"},
+						},
+						Border: lipgloss.NormalBorder(),
+					},
 				},
-				ExtrinsicWidth:  9,
-				ExtrinsicHeight: 5,
 			},
 			/*
 				text.TextComponent[model.AppState]{Text: "Hello world"},
