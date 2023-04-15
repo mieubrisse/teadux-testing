@@ -2,7 +2,7 @@ package div
 
 import (
 	"github.com/charmbracelet/lipgloss"
-	"github.com/mieubrisse/teadux/view/displayable"
+	"github.com/mieubrisse/teadux-testing/view/displayable"
 )
 
 type Alignment lipgloss.Position

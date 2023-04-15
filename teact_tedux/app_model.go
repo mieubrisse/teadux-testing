@@ -3,7 +3,7 @@ package teact_tedux
 import (
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/mieubrisse/teadux/view/displayable"
+	"github.com/mieubrisse/teadux-testing/view/displayable"
 )
 
 type Reducer[T any] func(currentState T, msg tea.KeyMsg) T

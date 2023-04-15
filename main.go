@@ -4,14 +4,14 @@ import (
 	"fmt"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/mieubrisse/teadux/controller"
-	"github.com/mieubrisse/teadux/model"
-	"github.com/mieubrisse/teadux/teact_tedux"
-	"github.com/mieubrisse/teadux/view/app"
-	"github.com/mieubrisse/teadux/view/displayable"
-	"github.com/mieubrisse/teadux/view/div"
-	"github.com/mieubrisse/teadux/view/flexbox"
-	"github.com/mieubrisse/teadux/view/text"
+	"github.com/mieubrisse/teadux-testing/controller"
+	"github.com/mieubrisse/teadux-testing/model"
+	"github.com/mieubrisse/teadux-testing/teact_tedux"
+	"github.com/mieubrisse/teadux-testing/view/app"
+	"github.com/mieubrisse/teadux-testing/view/displayable"
+	"github.com/mieubrisse/teadux-testing/view/div"
+	"github.com/mieubrisse/teadux-testing/view/flexbox"
+	"github.com/mieubrisse/teadux-testing/view/text"
 	"os"
 )
 
@@ -60,7 +60,7 @@ func main() {
 	*/
 
 	topLevelFlexbox := flexbox.Flexbox[model.AppState]{
-		LayoutDirection: flexbox.Vertical,
+		LayoutDirection: flexbox.Horizontal,
 		Items: []displayable.Displayable[model.AppState]{
 			flexbox.Flexbox[model.AppState]{
 				Items: []displayable.Displayable[model.AppState]{
@@ -68,13 +68,14 @@ func main() {
 						Items: []displayable.Displayable[model.AppState]{
 							text.TextComponent[model.AppState]{Text: "Hello"},
 						},
-						Border: lipgloss.NormalBorder(),
 					},
 					div.Div[model.AppState]{
 						Items: []displayable.Displayable[model.AppState]{
-							text.TextComponent[model.AppState]{Text: "       Cool"},
+							text.TextComponent[model.AppState]{Text: "Cool"},
 						},
-						Border: lipgloss.NormalBorder(),
+						Alignment:      div.Center,
+						Border:         lipgloss.NormalBorder(),
+						ExtrinsicWidth: 40,
 					},
 					div.Div[model.AppState]{
 						Items: []displayable.Displayable[model.AppState]{

@@ -2,8 +2,8 @@ package controller
 
 import (
 	tea "github.com/charmbracelet/bubbletea"
-	"github.com/mieubrisse/teadux/helpers"
-	"github.com/mieubrisse/teadux/model"
+	"github.com/mieubrisse/teadux-testing/helpers"
+	"github.com/mieubrisse/teadux-testing/model"
 )
 
 func Reduce(state model.AppState, msg tea.KeyMsg) model.AppState {

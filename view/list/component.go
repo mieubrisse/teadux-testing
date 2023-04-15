@@ -1,6 +1,6 @@
 package list
 
-import "github.com/mieubrisse/teadux/view/displayable"
+import "github.com/mieubrisse/teadux-testing/view/displayable"
 
 type List[T any] struct {
 	contentDeriver func(T) []displayable.Displayable[T]

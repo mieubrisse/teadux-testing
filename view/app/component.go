@@ -1,8 +1,8 @@
 package app
 
 import (
-	"github.com/mieubrisse/teadux/model"
-	"github.com/mieubrisse/teadux/view/flexbox"
+	"github.com/mieubrisse/teadux-testing/model"
+	"github.com/mieubrisse/teadux-testing/view/flexbox"
 )
 
 type AppComponent struct {

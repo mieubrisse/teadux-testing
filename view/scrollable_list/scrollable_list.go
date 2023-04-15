@@ -1,8 +1,8 @@
 package scrollable_list
 
 import (
-	"github.com/mieubrisse/teadux/helpers"
-	"github.com/mieubrisse/teadux/model"
+	"github.com/mieubrisse/teadux-testing/helpers"
+	"github.com/mieubrisse/teadux-testing/model"
 	"strings"
 )
 
